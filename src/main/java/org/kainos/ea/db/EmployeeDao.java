@@ -2,6 +2,7 @@ package org.kainos.ea.db;
 
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
+import org.kainos.ea.cli.SalesEmployee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -106,5 +107,6 @@ public class EmployeeDao {
             return employeeList;
         }
 
-    }
+    public abstract int createSalesEmployee(SalesEmployee employee) throws SQLException;
+}
 

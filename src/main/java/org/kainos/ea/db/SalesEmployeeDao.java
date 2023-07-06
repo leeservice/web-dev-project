@@ -1,15 +1,20 @@
 package org.kainos.ea.db;
 
+import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesEmployeeRequest;
+import org.kainos.ea.cli.SalesEmployeeResponse;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.kainos.ea.db.DatabaseConnector.getConnection;
 
-public class SalesEmployeeDao {
+public class SalesEmployeeDao extends EmployeeDao {
+//    EmployeeDao salesEmployeeDao = new SalesEmployeeDao();
 
-    public int createSalesEmployee(SalesEmployee employee) throws SQLException {
+    public int createSalesEmployee(int id, SalesEmployee employee) throws SQLException {
         Connection c = getConnection();
 
         String insertStatement = "INSERT INTO salesEmployee(employeeId, commissionRate) VALUES (?, ?);";
@@ -65,5 +70,24 @@ public class SalesEmployeeDao {
 
         }
         return null;
+    }
+
+    public List<SalesEmployeeRequest> getAllSalesEmployees() throws SQLException {
+        Connection c = getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("Select * from employee inner join salesEmployee using(employeeId) group by employeeId;");
+
+        List<SalesEmployeeRequest> salesemployeeList = new ArrayList<>();
+
+        while (rs.next()) {
+            SalesEmployeeResponse salesemployee = new SalesEmployeeResponse(
+                    rs.getInt("employeeId"),
+                    rs.getFloat("commissionRate")
+            );
+
+            salesemployeeList.add(salesemployee);
+        }
+        return salesemployeeList;
     }
 }
