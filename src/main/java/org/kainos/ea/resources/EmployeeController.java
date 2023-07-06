@@ -58,7 +58,8 @@ public class EmployeeController {
             try {
                 return Response.ok(employeeService.getAllEmployees()).build();
             } catch (FailedToCreateEmployeeException e) {
-                throw new RuntimeException(e);
+                System.err.println(e.getMessage());
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
         }
 
@@ -78,7 +79,6 @@ public class EmployeeController {
                 return Response.serverError().entity(e.getMessage()).build();
             } catch (InvalidEmployeeException | EmployeeDoesNotExistException e){
                 System.err.println(e.getMessage());
-
                 return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
             }
         }
