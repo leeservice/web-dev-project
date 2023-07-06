@@ -28,7 +28,6 @@ public class trueApplication extends Application<trueConfiguration> {
                 return configuration.getSwagger();
             }
         });
-
     }
 
     @Override

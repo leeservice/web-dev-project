@@ -58,7 +58,7 @@ public class EmployeeDao {
             Connection c = getConnection();
             Statement st = c.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT (`name`,salary,bankAccountNo,natInsuranceNo) FROM employee"
+            ResultSet rs = st.executeQuery("SELECT `name`,salary,bankAccountNo,natInsuranceNo FROM employee"
                     + " WHERE employeeId = " + id);
 
 
@@ -92,7 +92,7 @@ public class EmployeeDao {
             Connection c = getConnection();
             Statement st = c.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT (name,salary,bankAccountNo,natInsuranceNo) FROM employee;");
+            ResultSet rs = st.executeQuery("SELECT name,salary,bankAccountNo,natInsuranceNo FROM employee;");
 
             List<EmployeeRequest> employeeList = new ArrayList<>();
 
