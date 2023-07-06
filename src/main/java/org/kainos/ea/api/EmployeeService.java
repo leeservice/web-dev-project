@@ -3,6 +3,7 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.*;
+import org.kainos.ea.core.EmployeeRequestValidator;
 import org.kainos.ea.core.EmployeeValidator;
 import org.kainos.ea.db.EmployeeDao;
 
@@ -15,12 +16,14 @@ public class EmployeeService {
         private EmployeeDao employeeDao = new EmployeeDao();
 
         private EmployeeValidator employeeValidator = new EmployeeValidator();
+    private EmployeeRequestValidator employeeRequestValidator = new EmployeeRequestValidator();
+
 
     public int createEmployee (EmployeeRequest employee) throws FailedToCreateEmployeeException, InvalidEmployeeException {
 
         try {
 
-            String validation = employeeValidator.isValidEmployee(employee);
+            String validation = employeeRequestValidator.isValidEmployee(employee);
 
             if (validation != null) {
                 throw new InvalidEmployeeException(validation);
@@ -40,12 +43,12 @@ public class EmployeeService {
 
     public void updateDeliveryEmployee(int id, EmployeeRequest employee) throws InvalidEmployeeException, EmployeeDoesNotExistException, FailedToUpdateEmployeeException {
         try{
-            String validation = employeeValidator.isValidEmployee(employee);
+            String validation = employeeRequestValidator.isValidEmployee(employee);
             if (validation != null){
                 throw new InvalidEmployeeException(validation);
             }
 
-            Employee employeeToUpdate = employeeDao.getEmployeeByID(id);
+            EmployeeRequest employeeToUpdate = employeeDao.getEmployeeByID(id);
 
             if (employeeToUpdate == null){
                 throw new EmployeeDoesNotExistException();
@@ -60,10 +63,10 @@ public class EmployeeService {
     }
 
           
-          public Employee getEmployeeByID(int id) throws FailedToGetEmployeeException, EmployeeDoesNotExistException {
+          public EmployeeRequest getEmployeeByID(int id) throws FailedToGetEmployeeException, EmployeeDoesNotExistException {
 
             try {
-                Employee employee = employeeDao.getEmployeeByID(id);
+                EmployeeRequest employee = employeeDao.getEmployeeByID(id);
 
                 if (employee == null) {
                     throw new EmployeeDoesNotExistException();
@@ -79,7 +82,7 @@ public class EmployeeService {
 
     public void deleteEmployee(int id) throws EmployeeDoesNotExistException, FailedToDeleteEmployeeException {
         try {
-            Employee employeeToDelete = employeeDao.getEmployeeByID(id);
+            EmployeeRequest employeeToDelete = employeeDao.getEmployeeByID(id);
 
             if(employeeToDelete == null) {
                 throw new EmployeeDoesNotExistException();

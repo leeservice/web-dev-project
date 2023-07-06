@@ -9,7 +9,8 @@ public class EmployeeRequest {
         private String bankAccountNo;
         private String natInsuranceNo;
 
-    public EmployeeRequest(String name, double salary, String bankAccountNo, String natInsuranceNo) {
+        @JsonCreator
+    public EmployeeRequest(@JsonProperty("name") String name, @JsonProperty("salary") double salary, @JsonProperty("bankAccountNo") String bankAccountNo, @JsonProperty("natInsuranceNo") String natInsuranceNo) {
         this.name = name;
         this.salary = salary;
         this.bankAccountNo = bankAccountNo;

@@ -1,11 +1,10 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 
-public class EmployeeValidator {
+public class EmployeeRequestValidator {
 
-    public String isValidEmployee(Employee employee) {
+    public String isValidEmployee(EmployeeRequest employee) {
 
         if (employee.getName().length() > 50) {
 
