@@ -1,5 +1,6 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.EmployeeRequestValidator;
@@ -97,15 +98,15 @@ public class EmployeeService {
     }
 
 
-    public List<EmployeeRequest> getAllEmployees() throws FailedToCreateEmployeeException {
-        List<EmployeeRequest> employeeRequestList = null;
+    public List<Employee> getAllEmployees() throws FailedToCreateEmployeeException {
+        List<Employee> employeeList = null;
         try {
-            employeeRequestList = employeeDao.getAllEmployees();
+            employeeList = employeeDao.getAllEmployees();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        employeeRequestList.stream().forEach(System.out::println);
-        return employeeRequestList;
+        employeeList.stream().forEach(System.out::println);
+        return employeeList;
     }
 
 
