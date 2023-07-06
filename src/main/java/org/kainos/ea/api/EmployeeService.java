@@ -1,6 +1,5 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.Employee;
 import org.kainos.ea.cli.EmployeeRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.EmployeeRequestValidator;
@@ -16,6 +15,7 @@ public class EmployeeService {
         private EmployeeDao employeeDao = new EmployeeDao();
 
         private EmployeeValidator employeeValidator = new EmployeeValidator();
+
     private EmployeeRequestValidator employeeRequestValidator = new EmployeeRequestValidator();
 
 
